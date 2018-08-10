@@ -30,14 +30,16 @@ avg=float(count)/number
 vi_avg=float(count)/visit_storage_number
 print(avg,list(enumerate(stat)))
 #[7:x,6:x,5:x...]
-stat.reverse()
+#stat.reverse()
 res=0
 accu=[]
 total=sum(stat)
+rate=[]
 for iter in enumerate(stat):
     res+=iter[1]
     accu.append(res)
-accu.reverse()
+    rate.append(float(iter[1])/total)
+#accu.reverse()
 
 for i in enumerate(accu):
     accu[i[0]]=float(i[1])/float(total)
@@ -46,8 +48,15 @@ print(list(enumerate(accu)))
 x=range(len(accu))
 y=accu
 import matplotlib.pyplot as plt
-plt.bar(x,y,width=1.0)
+plt.plot(x,y,marker='.',linestyle='-',color='r')
+stat.reverse()
+plt.bar(x,rate)
 
+for i,v in enumerate(rate):
+    if v==0:
+        continue
+    plt.text(i-0.5,v+0.01,'%.2f'%v)
+plt.savefig(sys.argv[2])
 
 
 
