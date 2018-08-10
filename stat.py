@@ -46,16 +46,19 @@ for i in enumerate(accu):
 print(list(enumerate(accu)))
 
 x=range(len(accu))
-y=accu
+y=[i*100 for i in accu]
 import matplotlib.pyplot as plt
 plt.plot(x,y,marker='.',linestyle='-',color='r')
 stat.reverse()
-plt.bar(x,rate)
+rate_perc=[i*100 for i in rate]
+plt.bar(x,rate_perc)
 
 for i,v in enumerate(rate):
     if v==0:
         continue
-    plt.text(i-0.5,v+0.01,'%.2f'%v)
+    plt.text(i-0.5,v*100+1,'%2.2f'%(v*100),fontsize=8)
+plt.ylabel('Percentile',color='k')
+plt.xlabel('IO Frequency',color='k')
 plt.savefig(sys.argv[2])
 
 
